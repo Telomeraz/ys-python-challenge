@@ -1,0 +1,8 @@
+[flake8]
+max-doc-length = 79
+max-line-length = 119
+ignore = E203, W503
+exclude = */migrations/* */es_migrations/*
+per-file-ignores =
+    ys_python_challenge/ys_python_challenge/settings/local.py:F403,F405
+    ys_python_challenge/ys_python_challenge/settings/production.py:F403,F405
