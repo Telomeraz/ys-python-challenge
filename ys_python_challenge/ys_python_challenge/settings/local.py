@@ -7,6 +7,8 @@ SECRET_KEY = config("SECRET_KEY")
 
 ALLOWED_HOSTS += ["*"]
 
+INSTALLED_APPS += ("django_extensions",)
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
