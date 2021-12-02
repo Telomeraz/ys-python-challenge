@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "categories",
+    "accounts",
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "ys_python_challenge.wsgi.application"
 
+
+# User model
+
+AUTH_USER_MODEL = "accounts.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
