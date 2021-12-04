@@ -14,4 +14,9 @@ urlpatterns = [
         complete_order,
         name="order-complete",
     ),
+    path(
+        "order/list/",
+        OrderViewSet.as_view({"get": "list"}),
+        name="order-list",
+    ),
 ]
