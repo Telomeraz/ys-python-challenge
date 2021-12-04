@@ -5,7 +5,15 @@ from .order_item import OrderItem
 from ..exceptions import OrderAlreadyCompleted
 
 
+class OrderQuerySet(models.QuerySet):
+    def filter_owner(self, owner):
+        return self.filter(owner=owner)
+
+
 class OrderManager(models.Manager):
+    def get_queryset(self):
+        return OrderQuerySet(self.model, using=self._db)
+
     def create(self, order_dict):
         items = order_dict.pop("items")
 
