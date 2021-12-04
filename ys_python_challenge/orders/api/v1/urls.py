@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import OrderViewSet
+from .views import OrderViewSet, complete_order
 
 
 urlpatterns = [
@@ -8,5 +8,10 @@ urlpatterns = [
         "order/create/",
         OrderViewSet.as_view({"post": "create"}),
         name="order-create",
+    ),
+    path(
+        "order/<int:order_id>/complete/",
+        complete_order,
+        name="order-complete",
     ),
 ]
