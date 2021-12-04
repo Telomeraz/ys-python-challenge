@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from .serializers import OrderCreateSerializer, OrderListSerializer
+from orders.exceptions import OrderAlreadyCompleted
 from orders.models import Order
 from utils.mixins import SerializerMixin
 
@@ -29,7 +30,7 @@ def complete_order(request, order_id):
 
     try:
         order.do_complete()
-    except Exception:
+    except OrderAlreadyCompleted:
         return Response(status=status.HTTP_409_CONFLICT)
 
     return Response(status=status.HTTP_204_NO_CONTENT)
