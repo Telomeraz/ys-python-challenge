@@ -1,3 +1,4 @@
+from django.core import validators
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -22,4 +23,11 @@ class Product(models.Model):
         on_delete=models.PROTECT,
         related_name="products",
         verbose_name=_("The category of the product"),
+    )
+
+    unit_price = models.DecimalField(
+        decimal_places=2,
+        max_digits=12,
+        validators=(validators.MinValueValidator(0),),
+        verbose_name=_("The unit price of the product"),
     )
