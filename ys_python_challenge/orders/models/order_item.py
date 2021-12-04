@@ -3,6 +3,12 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+class OrderItemManager(models.Manager):
+    def create(self, order_item_dict):
+        order = self.model(**order_item_dict)
+        order.save()
+
+
 class OrderItem(models.Model):
     """Represents the item of its order."""
 
@@ -32,3 +38,5 @@ class OrderItem(models.Model):
         _("The quantity of the item"),
         validators=(validators.MinValueValidator(1),),
     )
+
+    objects = OrderItemManager()
