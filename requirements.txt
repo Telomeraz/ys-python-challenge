@@ -5,6 +5,7 @@ click==8.0.3
 decorator==5.1.0
 Django==3.2.9
 django-extensions==3.1.5
+django-filter==21.1
 djangorestframework==3.12.4
 flake8==4.0.1
 ipdb==0.13.9
