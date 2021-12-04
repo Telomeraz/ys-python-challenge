@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from .order_item import OrderItem
+from ..exceptions import OrderAlreadyCompleted
 
 
 class OrderManager(models.Manager):
@@ -57,3 +58,12 @@ class Order(models.Model):
     )
 
     objects = OrderManager()
+
+    def do_complete(self):
+        self.validate_can_complete()
+        self.status = self.Status.COMPLETED
+        self.save()
+
+    def validate_can_complete(self):
+        if self.status == self.Status.COMPLETED:
+            raise OrderAlreadyCompleted
