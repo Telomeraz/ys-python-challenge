@@ -1,6 +1,25 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from .order_item import OrderItem
+
+
+class OrderManager(models.Manager):
+    def create(self, order_dict):
+        items = order_dict.pop("items")
+
+        order = self.model(**order_dict)
+        order.save()
+
+        self.create_items(items, order)
+
+        return order
+
+    def create_items(self, items, order):
+        for item in items:
+            item["order"] = order
+            OrderItem.objects.create(item)
+
 
 class Order(models.Model):
     """Represents the order that the users can give."""
@@ -36,3 +55,5 @@ class Order(models.Model):
         related_name="orders",
         verbose_name=_("The restorant of the order"),
     )
+
+    objects = OrderManager()
