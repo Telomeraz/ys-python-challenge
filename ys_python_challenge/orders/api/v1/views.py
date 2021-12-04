@@ -16,6 +16,7 @@ class OrderViewSet(SerializerMixin, CreateModelMixin, ListModelMixin, GenericVie
         "list": OrderListSerializer,
     }
     queryset = Order.objects.all()
+    filterset_fields = ("status",)
 
     def get_queryset(self):
         return self.queryset.filter_owner(self.request.user)
