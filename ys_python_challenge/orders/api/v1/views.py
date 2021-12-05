@@ -15,11 +15,11 @@ class OrderViewSet(SerializerMixin, CreateModelMixin, ListModelMixin, GenericVie
         "create": OrderCreateSerializer,
         "list": OrderListSerializer,
     }
-    queryset = Order.objects.all()
     filterset_fields = ("status",)
 
     def get_queryset(self):
-        return self.queryset.filter_owner(self.request.user)
+        queryset = Order.objects.select_related("restaurant").prefetch_related("items__product")
+        return queryset.filter_owner(self.request.user)
 
 
 @api_view(("POST",))
