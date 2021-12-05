@@ -3,6 +3,8 @@ from django.utils.translation import gettext_lazy as _
 
 from .order_item import OrderItem
 from ..exceptions import OrderAlreadyCompleted
+from ..mixins import OrderChannelMixin
+from utils.decorators import pub_data
 
 
 class OrderQuerySet(models.QuerySet):
@@ -14,6 +16,7 @@ class OrderManager(models.Manager):
     def get_queryset(self):
         return OrderQuerySet(self.model, using=self._db)
 
+    @pub_data
     def create(self, order_dict):
         items = order_dict.pop("items")
 
@@ -30,7 +33,7 @@ class OrderManager(models.Manager):
             OrderItem.objects.create(item)
 
 
-class Order(models.Model):
+class Order(OrderChannelMixin, models.Model):
     """Represents the order that the users can give."""
 
     class Status(models.TextChoices):
