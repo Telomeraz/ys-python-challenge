@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "accounts",
     "restaurants",
     "products",
+    "pub_sub",
     "orders",
     "utils",
 ]
