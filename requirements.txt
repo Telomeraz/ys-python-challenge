@@ -3,9 +3,11 @@ backcall==0.2.0
 black==21.11b1
 click==8.0.3
 decorator==5.1.0
+Deprecated==1.2.13
 Django==3.2.9
 django-extensions==3.1.5
 django-filter==21.1
+django-redis==5.1.0
 djangorestframework==3.12.4
 flake8==4.0.1
 ipdb==0.13.9
@@ -26,6 +28,7 @@ pyflakes==2.4.0
 Pygments==2.10.0
 python-decouple==3.5
 pytz==2021.3
+redis==3.5.3
 regex==2021.11.10
 sqlparse==0.4.2
 toml==0.10.2
@@ -34,3 +37,4 @@ traitlets==5.1.1
 typing-extensions==4.0.1
 wcwidth==0.2.5
 Werkzeug==2.0.2
+wrapt==1.13.3
