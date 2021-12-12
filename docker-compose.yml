@@ -9,4 +9,4 @@ services:
     volumes:
       - ./ys_python_challenge:/ys_python_challenge
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:80 --settings=ys_python_challenge.settings.local"
+      sh -c "python manage.py runserver 0.0.0.0:8000 --settings=ys_python_challenge.settings.local"
