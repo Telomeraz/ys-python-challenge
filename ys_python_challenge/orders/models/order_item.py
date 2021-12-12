@@ -5,8 +5,9 @@ from django.utils.translation import gettext_lazy as _
 
 class OrderItemManager(models.Manager):
     def create(self, order_item_dict):
-        order = self.model(**order_item_dict)
-        order.save()
+        order_item = self.model(**order_item_dict)
+        order_item.save()
+        return order_item
 
 
 class OrderItem(models.Model):
