@@ -18,7 +18,8 @@ python manage.py test --settings=ys_python_challenge.settings.local
 ```
 
 #### Launching Subscription (Pub/Sub)
+
+You can launch subscription by using this command:
 ```bash
-$ redis-cli
-127.0.0.1:6379> PSUBSCRIBE orders
+python manage.py subscribe --settings=ys_python_challenge.settings.local
 ```
