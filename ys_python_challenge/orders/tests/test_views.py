@@ -6,8 +6,21 @@ from utils.base_test import BaseTest
 
 
 class OrderTest(BaseTest):
+    def test_order_create_view_login_required(self):
+        response = self.client.post(
+            reverse("order-create"),
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_order_list_view_login_required(self):
+        response = self.client.get(
+            reverse("order-list"),
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
     def test_order_create_view(self):
-        # import ipdb;ipdb.set_trace()
         data = {
             "address": "2377 Twin Willow Lane Jacksonville NC North Carolina",
             "restaurant": 1,
