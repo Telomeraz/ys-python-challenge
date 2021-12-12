@@ -10,6 +10,7 @@ python manage.py migrate --settings=ys_python_challenge.settings.local # Create 
 python manage.py createsuperuser --settings=ys_python_challenge.settings.local # Create superuser
 python manage.py runserver --settings=ys_python_challenge.settings.local # Launch server
 ```
+Note: Remember to create .env file in settings folder for settings variables.
 
 #### Launching Tests
 
