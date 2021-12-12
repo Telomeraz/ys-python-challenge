@@ -9,6 +9,14 @@ from utils.decorators import pub_data
 
 class OrderQuerySet(models.QuerySet):
     def filter_owner(self, owner):
+        """Filter by owner.
+
+        Args:
+            owner (obj of :model:`accounts.User)
+
+        Returns:
+            QuerySet
+        """
         return self.filter(owner=owner)
 
 
@@ -18,6 +26,14 @@ class OrderManager(models.Manager):
 
     @pub_data
     def create(self, order_dict):
+        """Crete new instance of :model:`orders.Order` and its item objects.
+
+        Args:
+            order_dict (dict)
+
+        Returns:
+            obj of :model:`orders.Order`
+        """
         items = order_dict.pop("items")
 
         order = self.model(**order_dict)
@@ -28,6 +44,12 @@ class OrderManager(models.Manager):
         return order
 
     def create_items(self, items, order):
+        """Create items of order.
+
+        Args:
+            items (list)
+            order (obj of :model:`orders.Order`)
+        """
         for item in items:
             item["order"] = order
             OrderItem.objects.create(item)
@@ -71,10 +93,16 @@ class Order(OrderChannelMixin, models.Model):
     objects = OrderManager()
 
     def do_complete(self):
+        """Change status of order to COMPLETED"""
         self.validate_can_complete()
         self.status = self.Status.COMPLETED
         self.save()
 
     def validate_can_complete(self):
+        """Check if order can be completed.
+
+        Raises:
+            OrderAlreadyCompleted: Raise when it's already completed.
+        """
         if self.status == self.Status.COMPLETED:
             raise OrderAlreadyCompleted

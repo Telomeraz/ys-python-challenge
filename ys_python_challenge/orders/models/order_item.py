@@ -5,6 +5,14 @@ from django.utils.translation import gettext_lazy as _
 
 class OrderItemManager(models.Manager):
     def create(self, order_item_dict):
+        """Create new instance of :model:`orders.OrderItem`
+
+        Args:
+            order_item_dict (dic)
+
+        Returns:
+            obj of :model:`orders.OrderItem
+        """
         order_item = self.model(**order_item_dict)
         order_item.save()
         return order_item

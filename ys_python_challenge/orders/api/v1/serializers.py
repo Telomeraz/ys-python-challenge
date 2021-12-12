@@ -29,6 +29,14 @@ class OrderCreateSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
+        """Create new instance of :model:`orders.Order`
+
+        Args:
+            validated_data (dict)
+
+        Returns:
+            obj of :model:`orders.Order`
+        """
         validated_data["owner"] = self.context["request"].user
         instance = self.Meta.model.objects.create(order_dict=validated_data)
         return instance

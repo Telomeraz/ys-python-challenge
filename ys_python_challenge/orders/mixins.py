@@ -5,4 +5,9 @@ class OrderChannelMixin:
     channel_name = "orders"
 
     def to_dict(self):
+        """Serialize model object to dictionary.
+
+        Returns:
+            dict
+        """
         return model_to_dict(self)
