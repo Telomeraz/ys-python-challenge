@@ -39,20 +39,9 @@ class OrderManager(models.Manager):
         order = self.model(**order_dict)
         order.save()
 
-        self.create_items(items, order)
+        order.create_items(items)
 
         return order
-
-    def create_items(self, items, order):
-        """Create items of order.
-
-        Args:
-            items (list)
-            order (obj of :model:`orders.Order`)
-        """
-        for item in items:
-            item["order"] = order
-            OrderItem.objects.create(item)
 
 
 class Order(OrderChannelMixin, models.Model):
@@ -106,3 +95,13 @@ class Order(OrderChannelMixin, models.Model):
         """
         if self.status == self.Status.COMPLETED:
             raise OrderAlreadyCompleted
+
+    def create_items(self, items):
+        """Create items of order.
+
+        Args:
+            items (list)
+        """
+        for item in items:
+            item["order"] = self
+            OrderItem.objects.create(item)
